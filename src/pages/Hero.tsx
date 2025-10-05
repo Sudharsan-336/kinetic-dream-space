@@ -30,15 +30,6 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.h1
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 gradient-text leading-tight"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Full Stack Developer
-            </motion.h1>
-
             <motion.p
               className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-4"
               initial={{ opacity: 0 }}

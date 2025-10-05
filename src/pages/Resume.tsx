@@ -4,8 +4,9 @@ import { Download, FileText } from "lucide-react";
 
 export default function Resume() {
   return (
-    <div className="min-h-screen py-32 px-4 relative">
+    <div className="min-h-screen py-32 px-4 relative overflow-hidden">
       <div className="absolute top-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] animate-float" />
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: "2s" }} />
       
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
@@ -54,38 +55,66 @@ export default function Resume() {
           transition={{ delay: 0.4 }}
           className="mt-12 grid md:grid-cols-2 gap-6"
         >
-          <div className="glass-card p-6 rounded-2xl">
+          <motion.div 
+            className="glass-card p-6 rounded-2xl"
+            whileHover={{ scale: 1.02, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <h3 className="text-xl font-bold mb-4 gradient-text">Experience</h3>
             <div className="space-y-4">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+              >
                 <div className="font-semibold">Senior Full Stack Developer</div>
                 <div className="text-sm text-muted-foreground">Tech Company • 2021 - Present</div>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 }}
+              >
                 <div className="font-semibold">Full Stack Developer</div>
                 <div className="text-sm text-muted-foreground">Startup Inc • 2019 - 2021</div>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8 }}
+              >
                 <div className="font-semibold">Frontend Developer</div>
                 <div className="text-sm text-muted-foreground">Agency • 2018 - 2019</div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="glass-card p-6 rounded-2xl">
+          <motion.div 
+            className="glass-card p-6 rounded-2xl"
+            whileHover={{ scale: 1.02, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <h3 className="text-xl font-bold mb-4 gradient-text">Education</h3>
             <div className="space-y-4">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+              >
                 <div className="font-semibold">B.S. Computer Science</div>
                 <div className="text-sm text-muted-foreground">University Name • 2014 - 2018</div>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 }}
+              >
                 <div className="font-semibold">Certifications</div>
                 <div className="text-sm text-muted-foreground">AWS Certified Developer</div>
                 <div className="text-sm text-muted-foreground">MongoDB Certified Professional</div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </div>

@@ -28,8 +28,9 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen py-32 px-4 relative">
+    <div className="min-h-screen py-32 px-4 relative overflow-hidden">
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-float" />
+      <div className="absolute bottom-20 right-20 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: "3s" }} />
       
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -48,41 +49,65 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="glass-card p-6 rounded-2xl">
+            <motion.div 
+              className="glass-card p-6 rounded-2xl"
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10 text-primary">
+                <motion.div 
+                  className="p-3 rounded-full bg-primary/10 text-primary"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <Mail size={24} />
-                </div>
+                </motion.div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
                   <p className="text-muted-foreground">your.email@example.com</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="glass-card p-6 rounded-2xl">
+            <motion.div 
+              className="glass-card p-6 rounded-2xl"
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-secondary/10 text-secondary">
+                <motion.div 
+                  className="p-3 rounded-full bg-secondary/10 text-secondary"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <Phone size={24} />
-                </div>
+                </motion.div>
                 <div>
                   <h3 className="font-semibold mb-1">Phone</h3>
                   <p className="text-muted-foreground">+1 (555) 123-4567</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="glass-card p-6 rounded-2xl">
+            <motion.div 
+              className="glass-card p-6 rounded-2xl"
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-accent/10 text-accent">
+                <motion.div 
+                  className="p-3 rounded-full bg-accent/10 text-accent"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <MapPin size={24} />
-                </div>
+                </motion.div>
                 <div>
                   <h3 className="font-semibold mb-1">Location</h3>
                   <p className="text-muted-foreground">San Francisco, CA</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           <motion.div
@@ -91,7 +116,11 @@ export default function Contact() {
             transition={{ delay: 0.4 }}
           >
             <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl space-y-6">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
                 <label className="block text-sm font-medium mb-2">Name</label>
                 <Input
                   value={formData.name}
@@ -100,9 +129,13 @@ export default function Contact() {
                   className="bg-background/50"
                   placeholder="John Doe"
                 />
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+              >
                 <label className="block text-sm font-medium mb-2">Email</label>
                 <Input
                   type="email"
@@ -112,9 +145,13 @@ export default function Contact() {
                   className="bg-background/50"
                   placeholder="john@example.com"
                 />
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+              >
                 <label className="block text-sm font-medium mb-2">Message</label>
                 <Textarea
                   value={formData.message}
@@ -123,16 +160,22 @@ export default function Contact() {
                   className="bg-background/50 min-h-[150px]"
                   placeholder="Tell me about your project..."
                 />
-              </div>
+              </motion.div>
 
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full glow-border hover:scale-105 transition-transform"
-                size="lg"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full glow-border hover:scale-105 transition-transform"
+                  size="lg"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </motion.div>
             </form>
           </motion.div>
         </div>

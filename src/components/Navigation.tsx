@@ -10,7 +10,6 @@ const navItems = [
   { path: "/skills", label: "Skills", icon: Code },
   { path: "/resume", label: "Resume", icon: FileText },
   { path: "/contact", label: "Contact", icon: Mail },
-  { path: "/articles", label: "Articles", icon: BookOpen },
   { path: "/profiles", label: "Profiles", icon: Github },
 ];
 
