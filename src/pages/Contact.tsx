@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -15,16 +16,42 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // EmailJS configuration - Replace these with your actual EmailJS credentials
+      // Get these from https://www.emailjs.com/
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
 
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon!",
-    });
+      // Send email using EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: "sudharsan.ramachandran3362@gmail.com",
+        },
+        publicKey
+      );
 
-    setFormData({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
+      toast({
+        title: "Message sent successfully!",
+        description: "Thanks for reaching out. I'll get back to you soon!",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly at sudharsan.ramachandran3362@gmail.com",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -64,7 +91,7 @@ export default function Contact() {
                 </motion.div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-muted-foreground">your.email@example.com</p>
+                  <p className="text-muted-foreground">sudharsan.ramachandran3362@gmail.com</p>
                 </div>
               </div>
             </motion.div>
@@ -84,7 +111,7 @@ export default function Contact() {
                 </motion.div>
                 <div>
                   <h3 className="font-semibold mb-1">Phone</h3>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                  <p className="text-muted-foreground">+91 94777 83527</p>
                 </div>
               </div>
             </motion.div>
@@ -104,7 +131,7 @@ export default function Contact() {
                 </motion.div>
                 <div>
                   <h3 className="font-semibold mb-1">Location</h3>
-                  <p className="text-muted-foreground">San Francisco, CA</p>
+                  <p className="text-muted-foreground">India, Tamil Nadu</p>
                 </div>
               </div>
             </motion.div>
@@ -116,6 +143,7 @@ export default function Contact() {
             transition={{ delay: 0.4 }}
           >
             <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl space-y-6">
+              <h2 className="text-2xl font-bold mb-4 gradient-text">Send a Message</h2>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -127,7 +155,7 @@ export default function Contact() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
                   className="bg-background/50"
-                  placeholder="John Doe"
+                  placeholder="your name"
                 />
               </motion.div>
 
@@ -143,7 +171,7 @@ export default function Contact() {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
                   className="bg-background/50"
-                  placeholder="john@example.com"
+                  placeholder="your email"
                 />
               </motion.div>
 

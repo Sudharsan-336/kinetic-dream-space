@@ -2,15 +2,13 @@ import { motion } from "framer-motion";
 import { ParticlesBackground } from "@/components/ParticlesBackground";
 import { Scene3D } from "@/components/Scene3D";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Download, Github, Linkedin, Twitter, Youtube, Instagram } from "lucide-react";
+import { ArrowRight, Download, Github, Linkedin, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Youtube, href: "#", label: "YouTube" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Github, href: "https://github.com/Sudharsan-336", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/sudharsan336", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/classy_sudhan", label: "Instagram" },
 ];
 
 export default function Hero() {
@@ -30,23 +28,22 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.p
-              className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+            <motion.h1
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 pt-8 pb-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Hi, I'm <span className="text-primary font-semibold">Your Name</span>
-            </motion.p>
+              Hi, I'm <span className="text-primary font-semibold">Sudharsan R</span>
+            </motion.h1>
 
             <motion.p
-              className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto px-4"
+              className="text-sm sm:text-base lg:text-lg text-foreground mb-8 max-w-3xl mx-auto px-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              Crafting beautiful, performant web experiences with modern technologies.
-              Passionate about clean code, innovative solutions, and continuous learning.
+              Turning ideas into functional and efficient solutions using programming skills.
             </motion.p>
 
             <motion.div
@@ -73,28 +70,137 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
+              whileHover={{ scale: 1.02, y: -5 }}
             >
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 gradient-text">About Me</h2>
-              <p className="text-muted-foreground leading-relaxed text-sm sm:text-base lg:text-lg">
-                A passionate developer with expertise in React, Node.js, and modern web technologies.
-                I've delivered 50+ projects, contributed to open-source communities, and maintain a
-                strong presence on coding platforms. My work focuses on creating intuitive user
-                experiences backed by robust, scalable architectures.
-              </p>
-              <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
-                <div className="text-center">
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary">50+</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">Projects</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary">5+</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">Years Exp</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text">100+</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">Problems Solved</div>
-                </div>
-              </div>
+              <motion.h2 
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 gradient-text"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.1 }}
+              >
+                About Me
+              </motion.h2>
+              <motion.p 
+                className="text-muted-foreground leading-relaxed text-sm sm:text-base lg:text-lg"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2 }}
+              >
+                I'm a passionate developer skilled in{" "}
+                <motion.span 
+                  className="text-primary font-semibold"
+                  animate={{ 
+                    textShadow: [
+                      "0 0 0px rgba(0,0,0,0)",
+                      "0 0 10px rgba(59, 130, 246, 0.5)",
+                      "0 0 0px rgba(0,0,0,0)"
+                    ]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    repeatDelay: 3
+                  }}
+                >
+                  HTML
+                </motion.span>
+                ,{" "}
+                <motion.span 
+                  className="text-primary font-semibold"
+                  animate={{ 
+                    textShadow: [
+                      "0 0 0px rgba(0,0,0,0)",
+                      "0 0 10px rgba(59, 130, 246, 0.5)",
+                      "0 0 0px rgba(0,0,0,0)"
+                    ]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    delay: 0.5
+                  }}
+                >
+                  CSS
+                </motion.span>
+                ,{" "}
+                <motion.span 
+                  className="text-primary font-semibold"
+                  animate={{ 
+                    textShadow: [
+                      "0 0 0px rgba(0,0,0,0)",
+                      "0 0 10px rgba(59, 130, 246, 0.5)",
+                      "0 0 0px rgba(0,0,0,0)"
+                    ]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    delay: 1
+                  }}
+                >
+                  JAVA
+                </motion.span>
+                ,{" "}
+                <motion.span 
+                  className="text-primary font-semibold"
+                  animate={{ 
+                    textShadow: [
+                      "0 0 0px rgba(0,0,0,0)",
+                      "0 0 10px rgba(59, 130, 246, 0.5)",
+                      "0 0 0px rgba(0,0,0,0)"
+                    ]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    delay: 1.5
+                  }}
+                >
+                  MAVEN
+                </motion.span>
+                ,{" "}
+                <motion.span 
+                  className="text-primary font-semibold"
+                  animate={{ 
+                    textShadow: [
+                      "0 0 0px rgba(0,0,0,0)",
+                      "0 0 10px rgba(59, 130, 246, 0.5)",
+                      "0 0 0px rgba(0,0,0,0)"
+                    ]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    delay: 2
+                  }}
+                >
+                  XML
+                </motion.span>
+                , and{" "}
+                <motion.span 
+                  className="text-primary font-semibold"
+                  animate={{ 
+                    textShadow: [
+                      "0 0 0px rgba(0,0,0,0)",
+                      "0 0 10px rgba(59, 130, 246, 0.5)",
+                      "0 0 0px rgba(0,0,0,0)"
+                    ]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    delay: 2.5
+                  }}
+                >
+                  MYSQL
+                </motion.span>
+                . I love turning ideas into efficient, user-friendly applications with clean and maintainable code. I'm always learning new technologies and seeking opportunities to grow and contribute to meaningful projects.
+              </motion.p>
             </motion.div>
 
             {/* Social Links */}
@@ -110,13 +216,37 @@ export default function Hero() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass-card p-3 rounded-full hover:scale-110 hover:glow-border transition-all duration-300"
-                  whileHover={{ y: -5 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2 + index * 0.1 }}
+                  className="glass-card p-3 rounded-full hover:scale-110 hover:glow-border transition-all duration-300 relative"
+                  whileHover={{ 
+                    y: -8,
+                    rotate: [0, -10, 10, -10, 0],
+                    scale: 1.15
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20, rotate: -180 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    rotate: 0
+                  }}
+                  transition={{ 
+                    delay: 1.2 + index * 0.1,
+                    rotate: { duration: 0.6, type: "spring" }
+                  }}
                 >
-                  <social.icon size={24} className="text-primary" />
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                      delay: index * 0.2,
+                    }}
+                  >
+                    <social.icon size={24} className="text-primary" />
+                  </motion.div>
                 </motion.a>
               ))}
             </motion.div>

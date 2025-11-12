@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Home, User, Briefcase, Code, FileText, Mail, BookOpen, Github, Menu, X } from "lucide-react";
+import { Home, User, Briefcase, Code, FileText, Mail, BookOpen, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -10,7 +10,6 @@ const navItems = [
   { path: "/skills", label: "Skills", icon: Code },
   { path: "/resume", label: "Resume", icon: FileText },
   { path: "/contact", label: "Contact", icon: Mail },
-  { path: "/profiles", label: "Profiles", icon: Github },
 ];
 
 export const Navigation = () => {

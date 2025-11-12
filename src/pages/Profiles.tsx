@@ -1,35 +1,21 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Github, Award, Code2, Trophy } from "lucide-react";
+import { Github, Code2 } from "lucide-react";
 
 const profiles = [
   {
     name: "GitHub",
     icon: Github,
-    stats: "500+ Contributions",
-    link: "https://github.com",
+    stats: "GitHub Contributions",
+    link: "https://github.com/Sudharsan-336",
     color: "from-purple-500 to-pink-500",
   },
   {
     name: "LeetCode",
     icon: Code2,
-    stats: "1000+ Problems Solved",
-    link: "https://leetcode.com",
+    stats: "LeetCode Problems Solved",
+    link: "https://leetcode.com/u/sudharsan336/",
     color: "from-orange-500 to-red-500",
-  },
-  {
-    name: "SkillRack",
-    icon: Award,
-    stats: "Top 10% Rank",
-    link: "#",
-    color: "from-cyan-500 to-blue-500",
-  },
-  {
-    name: "CodeChef",
-    icon: Trophy,
-    stats: "4 Star Rating",
-    link: "https://codechef.com",
-    color: "from-green-500 to-emerald-500",
   },
 ];
 
@@ -44,8 +30,8 @@ export default function Profiles() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text">Coding Profiles</h1>
-          <p className="text-xl text-muted-foreground">My presence across coding platforms</p>
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text pb-2">Coding Profiles</h1>
+          <p className="text-xl text-muted-foreground pt-1">My presence across coding platforms</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -63,13 +49,11 @@ export default function Profiles() {
               <Card className="glass-card border-border overflow-hidden group cursor-pointer h-full">
                 <CardHeader>
                   <div className="flex items-center gap-4">
-                    <motion.div
+                    <div
                       className={`p-4 rounded-2xl bg-gradient-to-br ${profile.color}`}
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
                     >
                       <profile.icon size={32} className="text-white" />
-                    </motion.div>
+                    </div>
                     <div>
                       <CardTitle className="text-2xl gradient-text group-hover:glow-text transition-all">
                         {profile.name}
@@ -94,28 +78,6 @@ export default function Profiles() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mt-12 glass-card p-8 rounded-3xl text-center"
-        >
-          <h2 className="text-2xl font-bold mb-4 gradient-text">Competitive Programming Stats</h2>
-          <div className="grid grid-cols-3 gap-6">
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">1500+</div>
-              <div className="text-muted-foreground">Problems Solved</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-secondary mb-2">50+</div>
-              <div className="text-muted-foreground">Contests</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold gradient-text mb-2">Top 5%</div>
-              <div className="text-muted-foreground">Global Rank</div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

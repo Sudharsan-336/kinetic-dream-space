@@ -14,23 +14,14 @@ export default function Resume() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text">My Resume</h1>
-          <p className="text-xl text-muted-foreground">Download my professional resume</p>
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text pb-2">My Resume</h1>
+          <p className="text-xl text-muted-foreground pt-1">Download my professional resume</p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="glass-card p-12 rounded-3xl text-center"
-        >
-          <motion.div
-            className="inline-flex p-8 rounded-full bg-primary/10 mb-8"
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ type: "spring" }}
-          >
+        <div className="glass-card p-12 rounded-3xl text-center">
+          <div className="inline-flex p-8 rounded-full bg-primary/10 mb-8">
             <FileText size={80} className="text-primary" />
-          </motion.div>
+          </div>
 
           <h2 className="text-2xl font-bold mb-4">Professional Resume</h2>
           <p className="text-muted-foreground mb-8 max-w-md mx-auto">
@@ -42,12 +33,12 @@ export default function Resume() {
             className="glow-border hover:scale-105 transition-transform"
             asChild
           >
-            <a href="/resume.pdf" download>
+            <a href="/Sudharsan R - Resume.pdf" download>
               <Download className="mr-2" />
               Download Resume
             </a>
           </Button>
-        </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -67,24 +58,16 @@ export default function Resume() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <div className="font-semibold">Senior Full Stack Developer</div>
-                <div className="text-sm text-muted-foreground">Tech Company • 2021 - Present</div>
+                <div className="font-semibold">Java Development Intern</div>
+                <div className="text-sm text-muted-foreground">InternPe • 28th July – 24th Aug 2025</div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.7 }}
               >
-                <div className="font-semibold">Full Stack Developer</div>
-                <div className="text-sm text-muted-foreground">Startup Inc • 2019 - 2021</div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8 }}
-              >
-                <div className="font-semibold">Frontend Developer</div>
-                <div className="text-sm text-muted-foreground">Agency • 2018 - 2019</div>
+                <div className="font-semibold">Java Programming Intern</div>
+                <div className="text-sm text-muted-foreground">CODTECH IT Solutions • 26th Sep – 11th Nov 2025</div>
               </motion.div>
             </div>
           </motion.div>
@@ -101,17 +84,73 @@ export default function Resume() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <div className="font-semibold">B.S. Computer Science</div>
-                <div className="text-sm text-muted-foreground">University Name • 2014 - 2018</div>
+                <div className="font-semibold whitespace-nowrap">B.Tech in Computer Science and Business System</div>
+                <div className="text-sm text-muted-foreground">Panimalar Engineering College, Chennai • 2023 – 2027</div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.7 }}
               >
-                <div className="font-semibold">Certifications</div>
-                <div className="text-sm text-muted-foreground">AWS Certified Developer</div>
-                <div className="text-sm text-muted-foreground">MongoDB Certified Professional</div>
+                <div className="font-semibold">HSC (Higher Secondary Certificate)</div>
+                <div className="text-sm text-muted-foreground">Bharathidasan Matric Higher Secondary School, Kanchipuram • June 2022 – April 2023</div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                <div className="font-semibold">SSLC (Secondary School Leaving Certificate)</div>
+                <div className="text-sm text-muted-foreground">Bharathidasan Matric Higher Secondary School, Kanchipuram • June 2020 – April 2021</div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="mt-12"
+        >
+          <motion.div 
+            className="glass-card p-6 rounded-2xl"
+            whileHover={{ scale: 1.02, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <h3 className="text-xl font-bold mb-4 gradient-text">Certifications</h3>
+            <div className="space-y-3">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+              >
+                <div className="font-semibold">Java Programming</div>
+                <div className="text-sm text-muted-foreground">Udemy</div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 }}
+              >
+                <div className="font-semibold">SQL and Relational Databases</div>
+                <div className="text-sm text-muted-foreground">Cognitive Class (IBM)</div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                <div className="font-semibold">Technology Job Simulation</div>
+                <div className="text-sm text-muted-foreground">Deloitte</div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.9 }}
+              >
+                <div className="font-semibold">Networking Basics</div>
+                <div className="text-sm text-muted-foreground">Cisco</div>
               </motion.div>
             </div>
           </motion.div>

@@ -3,55 +3,36 @@ import { ExternalLink, Github } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const projects = [
+const projects: Array<{
+  title: string;
+  description: string;
+  tech: string[];
+  image: string;
+  github: string;
+  live?: string;
+}> = [
   {
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe"],
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80",
-    github: "#",
-    live: "#",
+    title: "JavaMiniGames",
+    description:"Built interactive, engaging, and visually appealing Java-based classic games using console and Swing GUI, applying OOP and event-driven programming for smooth, responsive, dynamic, and real-time gameplay with scoring and real-time input handling.",
+    tech: ["Java", "Swing", "OOP", "Collections Framework", "Event Handling"],
+    image: "JavaMiniGames.jpg",
+    github: "https://github.com/Sudharsan-336/JavaMiniGames",
   },
   {
-    title: "AI Chat Application",
-    description: "Real-time chat application with AI-powered responses and sentiment analysis.",
-    tech: ["React", "WebSocket", "OpenAI", "PostgreSQL"],
-    image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&q=80",
-    github: "#",
-    live: "#",
+    title: "ATM Simulation System",
+    description: "The ATM Simulation System is a Java-based project that simulates real-world ATM functionality. Users can perform essential banking operations such as deposits, withdrawals, transfers, and balance inquiries. The system also supports account creation, PIN management, transaction history, and file-based data persistence.",
+    tech: ["Java", "OOP", "File Handling", "Exception Handling", "Collections Framework"],
+    image: "ATM System.jpg",
+    github: "https://github.com/Sudharsan-336/ATM-Project",
   },
   {
-    title: "Task Management System",
-    description: "Collaborative project management tool with kanban boards and team analytics.",
-    tech: ["Next.js", "TypeScript", "Prisma", "Tailwind"],
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
-    github: "#",
-    live: "#",
+    title: "Hotel Management System",
+   description: "Developed a Java-based Hotel Management System with room booking, food ordering, and billing. Implemented Luxury and Deluxe Rooms using OOP concepts and Java Serialization for data persistence, demonstrating skills in Java programming and event-driven application development.",
+    tech: ["Java", "OOP", "File Handling", "Serialization", "Exception Handling", "Collections", "ArrayLists"],
+    image: "Hotel.jpeg",
+    github: "https://github.com/Sudharsan-336/Hotel-Management-System/tree/main",
   },
-  {
-    title: "Portfolio CMS",
-    description: "Headless CMS for managing portfolio content with drag-and-drop builder.",
-    tech: ["React", "GraphQL", "Strapi", "AWS"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Fitness Tracker",
-    description: "Mobile-first fitness tracking app with workout plans and progress analytics.",
-    tech: ["React Native", "Firebase", "Redux", "Chart.js"],
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Blog Platform",
-    description: "Modern blogging platform with markdown support and SEO optimization.",
-    tech: ["Next.js", "MDX", "Vercel", "Tailwind"],
-    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80",
-    github: "#",
-    live: "#",
-  },
+
 ];
 
 export default function Projects() {
@@ -65,8 +46,8 @@ export default function Projects() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text">My Projects</h1>
-          <p className="text-xl text-muted-foreground">A showcase of my recent work and experiments</p>
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text pb-2">My Projects</h1>
+          <p className="text-xl text-muted-foreground pt-1">A showcase of my recent work and experiments</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -89,8 +70,8 @@ export default function Projects() {
                 </div>
                 
                 <CardHeader>
-                  <CardTitle className="text-xl gradient-text">{project.title}</CardTitle>
-                  <CardDescription>{project.description}</CardDescription>
+                  <CardTitle className="text-xl gradient-text pb-1">{project.title}</CardTitle>
+                  <CardDescription className="pt-1">{project.description}</CardDescription>
                 </CardHeader>
                 
                 <CardContent>
@@ -112,12 +93,14 @@ export default function Projects() {
                         Code
                       </a>
                     </Button>
-                    <Button size="sm" className="flex-1" asChild>
-                      <a href={project.live} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink size={16} className="mr-2" />
-                        Live
-                      </a>
-                    </Button>
+                    {project.live && (
+                      <Button size="sm" className="flex-1" asChild>
+                        <a href={project.live} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink size={16} className="mr-2" />
+                          Live
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
