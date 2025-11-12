@@ -7,7 +7,7 @@ const skills = [
   { name: "JAVA", level: 85, color: "from-green-500 to-emerald-500" },
   { name: "MySQL", level: 85, color: "from-purple-500 to-pink-500" },
   { name: "PostgreSQL", level: 85, color: "from-cyan-500 to-teal-500" },
-  { name: "GIT", level: 90, color: "from-pink-500 to-rose-500" },
+  { name: "Git & GitHub", level: 90, color: "from-pink-500 to-rose-500" },
   { name: "Firebase", level: 80, color: "from-green-500 to-cyan-500" },
 ];
 
@@ -24,21 +24,40 @@ const SkillBar = ({ name, level, color, index }: { name: string; level: number; 
       initial={{ opacity: 0, x: -30 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="space-y-2"
+      className="space-y-2 rounded-2xl p-4 md:p-5 bg-background/40 backdrop-blur-sm border border-border/40 shadow-sm"
+      whileHover={{ scale: 1.02, y: -3 }}
+      whileTap={{ scale: 0.99 }}
     >
-      <div className="flex justify-between items-center">
-        <span className="text-lg font-medium">{name}</span>
-        <span className="text-primary font-bold">{level}%</span>
-      </div>
-      <div className="h-3 bg-muted rounded-full overflow-hidden">
+      <motion.div
+        className="flex justify-between items-center"
+        animate={{
+          y: [0, -2, 0],
+        }}
+        transition={{
+          duration: 3.2,
+          repeat: Infinity,
+          delay: index * 0.12,
+          repeatType: "mirror",
+        }}
+      >
+        <span className="text-lg font-medium tracking-wide">{name}</span>
+        <motion.span
+          className="text-primary font-bold"
+          animate={{
+            opacity: [0.8, 1, 0.8],
+          }}
+          transition={{ duration: 2, repeat: Infinity, delay: index * 0.1 }}
+        >
+          {level}%
+        </motion.span>
+      </motion.div>
+      <div className="h-3 bg-muted rounded-full overflow-hidden relative">
         <motion.div
           className={`h-full bg-gradient-to-r ${color} rounded-full relative`}
           initial={{ width: 0 }}
           animate={{ width: `${width}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <div className="absolute inset-0 bg-white/20 animate-glow-pulse" />
-        </motion.div>
+        />
       </div>
     </motion.div>
   );

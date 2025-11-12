@@ -216,36 +216,65 @@ export default function Hero() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass-card p-3 rounded-full hover:scale-110 hover:glow-border transition-all duration-300 relative"
-                  whileHover={{ 
-                    y: -8,
-                    rotate: [0, -10, 10, -10, 0],
-                    scale: 1.15
+                  className="relative glass-card p-3 rounded-full transition-all duration-300"
+                  whileHover={{
+                    y: -12,
+                    rotate: [0, -6, 6, 0],
+                    scale: 1.16,
                   }}
                   whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20, rotate: -180 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.6 }}
                   animate={{ 
                     opacity: 1, 
                     y: 0,
-                    rotate: 0
+                    scale: 1
                   }}
                   transition={{ 
-                    delay: 1.2 + index * 0.1,
-                    rotate: { duration: 0.6, type: "spring" }
+                    delay: 1.2 + index * 0.12,
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 18
                   }}
                 >
-                  <motion.div
+                  <motion.span
+                    className="absolute inset-1 rounded-full bg-gradient-to-br from-primary/40 via-transparent to-primary/40 blur-md opacity-60"
                     animate={{
-                      scale: [1, 1.1, 1],
+                      opacity: [0.35, 0.7, 0.35],
+                      scale: [0.9, 1.12, 0.9],
                     }}
                     transition={{
-                      duration: 2,
+                      duration: 3,
                       repeat: Infinity,
-                      repeatDelay: 1,
-                      delay: index * 0.2,
+                      repeatType: "mirror",
+                      delay: index * 0.25,
+                    }}
+                  />
+                  <motion.span
+                    className="absolute inset-0 rounded-full border border-primary/50"
+                    animate={{
+                      rotate: [0, 360],
+                    }}
+                    transition={{
+                      duration: 7,
+                      repeat: Infinity,
+                      ease: "linear",
+                      delay: index * 0.3,
+                    }}
+                  />
+                  <motion.div
+                    className="relative z-10 flex items-center justify-center text-primary"
+                    animate={{
+                      scale: [1, 1.07, 1],
+                      filter: ["drop-shadow(0 0 0px rgba(59,130,246,0))", "drop-shadow(0 0 10px rgba(59,130,246,0.35))", "drop-shadow(0 0 0px rgba(59,130,246,0))"],
+                    }}
+                    transition={{
+                      duration: 2.1,
+                      repeat: Infinity,
+                      repeatDelay: 0.5,
+                      delay: index * 0.18,
                     }}
                   >
-                    <social.icon size={24} className="text-primary" />
+                    <social.icon size={24} />
                   </motion.div>
                 </motion.a>
               ))}

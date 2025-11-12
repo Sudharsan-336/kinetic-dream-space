@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,28 +12,67 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  const emailConfig = useMemo(() => {
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "YOUR_SERVICE_ID";
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "YOUR_TEMPLATE_ID";
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "YOUR_PUBLIC_KEY";
+    const ownerEmail = import.meta.env.VITE_CONTACT_EMAIL ?? "sudharsan.ramachandran336@gmail.com";
+
+    return {
+      serviceId,
+      templateId,
+      publicKey,
+      ownerEmail,
+      isConfigured:
+        serviceId !== "YOUR_SERVICE_ID" &&
+        templateId !== "YOUR_TEMPLATE_ID" &&
+        publicKey !== "YOUR_PUBLIC_KEY",
+    };
+  }, []);
+
+  useEffect(() => {
+    if (emailConfig.isConfigured) {
+      emailjs.init(emailConfig.publicKey);
+    }
+  }, [emailConfig.isConfigured, emailConfig.publicKey]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!emailConfig.isConfigured) {
+      toast({
+        title: "Contact temporarily unavailable",
+        description: "Email service is not configured correctly. Please reach out directly at sudharsan.ramachandran336@gmail.com.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!formData.email.includes("@")) {
+      toast({
+        title: "Invalid email address",
+        description: "Please enter a valid email address so I can reply to you.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // EmailJS configuration - Replace these with your actual EmailJS credentials
-      // Get these from https://www.emailjs.com/
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
-
-      // Send email using EmailJS
       await emailjs.send(
-        serviceId,
-        templateId,
+        emailConfig.serviceId,
+        emailConfig.templateId,
         {
           from_name: formData.name,
           from_email: formData.email,
+          reply_to: formData.email,
           message: formData.message,
-          to_email: "sudharsan.ramachandran3362@gmail.com",
+          user_email: formData.email,
+          to_email: emailConfig.ownerEmail,
+          to_name: "Sudharsan R",
         },
-        publicKey
+        emailConfig.publicKey
       );
 
       toast({
@@ -46,7 +85,7 @@ export default function Contact() {
       console.error("Email sending failed:", error);
       toast({
         title: "Failed to send message",
-        description: "Please try again or contact me directly at sudharsan.ramachandran3362@gmail.com",
+        description: "Please try again or contact me directly at sudharsan.ramachandran336@gmail.com.",
         variant: "destructive",
       });
     } finally {
@@ -82,16 +121,12 @@ export default function Contact() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="flex items-start gap-4">
-                <motion.div 
-                  className="p-3 rounded-full bg-primary/10 text-primary"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className="p-3 rounded-full bg-primary/10 text-primary">
                   <Mail size={24} />
-                </motion.div>
+                </div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-muted-foreground">sudharsan.ramachandran3362@gmail.com</p>
+                  <p className="text-muted-foreground">sudharsan.ramachandran336@gmail.com</p>
                 </div>
               </div>
             </motion.div>
@@ -102,13 +137,9 @@ export default function Contact() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="flex items-start gap-4">
-                <motion.div 
-                  className="p-3 rounded-full bg-secondary/10 text-secondary"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className="p-3 rounded-full bg-secondary/10 text-secondary">
                   <Phone size={24} />
-                </motion.div>
+                </div>
                 <div>
                   <h3 className="font-semibold mb-1">Phone</h3>
                   <p className="text-muted-foreground">+91 94777 83527</p>
@@ -122,13 +153,9 @@ export default function Contact() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="flex items-start gap-4">
-                <motion.div 
-                  className="p-3 rounded-full bg-accent/10 text-accent"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className="p-3 rounded-full bg-accent/10 text-accent">
                   <MapPin size={24} />
-                </motion.div>
+                </div>
                 <div>
                   <h3 className="font-semibold mb-1">Location</h3>
                   <p className="text-muted-foreground">India, Tamil Nadu</p>

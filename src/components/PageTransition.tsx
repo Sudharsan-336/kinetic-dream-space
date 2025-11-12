@@ -21,6 +21,7 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
           stiffness: 260,
           damping: 20,
         }}
+        className="min-h-screen bg-background"
       >
         {children}
       </motion.div>
