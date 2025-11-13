@@ -1,48 +1,26 @@
 import { motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { type ChangeEvent, type FormEvent, type ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from "@emailjs/browser";
+
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY = "246cab45-5e67-4b95-813d-b5a511aea172";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const emailConfig = useMemo(() => {
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "YOUR_SERVICE_ID";
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "YOUR_TEMPLATE_ID";
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "YOUR_PUBLIC_KEY";
-    const ownerEmail = import.meta.env.VITE_CONTACT_EMAIL ?? "sudharsan.ramachandran336@gmail.com";
-
-    return {
-      serviceId,
-      templateId,
-      publicKey,
-      ownerEmail,
-      isConfigured:
-        serviceId !== "YOUR_SERVICE_ID" &&
-        templateId !== "YOUR_TEMPLATE_ID" &&
-        publicKey !== "YOUR_PUBLIC_KEY",
-    };
-  }, []);
-
-  useEffect(() => {
-    if (emailConfig.isConfigured) {
-      emailjs.init(emailConfig.publicKey);
-    }
-  }, [emailConfig.isConfigured, emailConfig.publicKey]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!emailConfig.isConfigured) {
+    if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Contact temporarily unavailable",
-        description: "Email service is not configured correctly. Please reach out directly at sudharsan.ramachandran336@gmail.com.",
+        title: "Missing fields",
+        description: "Please fill out all fields before submitting.",
         variant: "destructive",
       });
       return;
@@ -50,8 +28,8 @@ export default function Contact() {
 
     if (!formData.email.includes("@")) {
       toast({
-        title: "Invalid email address",
-        description: "Please enter a valid email address so I can reply to you.",
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
         variant: "destructive",
       });
       return;
@@ -60,32 +38,33 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      await emailjs.send(
-        emailConfig.serviceId,
-        emailConfig.templateId,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          reply_to: formData.email,
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
           message: formData.message,
-          user_email: formData.email,
-          to_email: emailConfig.ownerEmail,
-          to_name: "Sudharsan R",
-        },
-        emailConfig.publicKey
-      );
-
-      toast({
-        title: "Message sent successfully!",
-        description: "Thanks for reaching out. I'll get back to you soon!",
+        }),
       });
 
-      setFormData({ name: "", email: "", message: "" });
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thanks for reaching out. I'll get back to you soon!",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error(result.message || "Something went wrong");
+      }
     } catch (error) {
-      console.error("Email sending failed:", error);
+      console.error("Form submission failed:", error);
       toast({
         title: "Failed to send message",
-        description: "Please try again or contact me directly at sudharsan.ramachandran336@gmail.com.",
+        description: "Please try again or contact me directly.",
         variant: "destructive",
       });
     } finally {
@@ -94,128 +73,68 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen py-32 px-4 relative overflow-hidden">
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-20 right-20 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: "3s" }} />
-      
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section className="relative overflow-hidden py-16 md:py-28 px-4 sm:px-6">
+      <div className="pointer-events-none hidden md:block absolute top-10 left-1/2 -translate-x-1/2 w-72 h-72 bg-primary/10 rounded-full blur-[110px] animate-float" />
+      <div className="pointer-events-none hidden lg:block absolute bottom-10 right-20 w-80 h-80 bg-secondary/10 rounded-full blur-[120px] animate-float" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16 px-2"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text">Get In Touch</h1>
-          <p className="text-xl text-muted-foreground">Let's discuss your next project</p>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 gradient-text">Get In Touch</h1>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Let's discuss your next project
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-8 md:gap-12 md:grid-cols-2">
+          {/* Contact Info Section */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
             className="space-y-6"
           >
-            <motion.div 
-              className="glass-card p-6 rounded-2xl"
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10 text-primary">
-                  <Mail size={24} />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-muted-foreground">sudharsan.ramachandran336@gmail.com</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="glass-card p-6 rounded-2xl"
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-secondary/10 text-secondary">
-                  <Phone size={24} />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Phone</h3>
-                  <p className="text-muted-foreground">+91 94777 83527</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="glass-card p-6 rounded-2xl"
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-accent/10 text-accent">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Location</h3>
-                  <p className="text-muted-foreground">India, Tamil Nadu</p>
-                </div>
-              </div>
-            </motion.div>
+            <InfoCard icon={<Mail size={24} />} title="Email" text="sudharsan.ramachandran336@gmail.com" color="primary" />
+            <InfoCard icon={<Phone size={24} />} title="Phone" text="+91 94777 83527" color="secondary" />
+            <InfoCard icon={<MapPin size={24} />} title="Location" text="India, Tamil Nadu, Kanchipuram-631501" color="accent" />
           </motion.div>
 
+          {/* Form Section */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl space-y-6">
-              <h2 className="text-2xl font-bold mb-4 gradient-text">Send a Message</h2>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                <label className="block text-sm font-medium mb-2">Name</label>
-                <Input
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className="bg-background/50"
-                  placeholder="your name"
-                />
-              </motion.div>
+            <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
+              <h2 className="text-xl sm:text-2xl font-bold mb-2 gradient-text text-center md:text-left">Send a Message</h2>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                <label className="block text-sm font-medium mb-2">Email</label>
-                <Input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  className="bg-background/50"
-                  placeholder="your email"
-                />
-              </motion.div>
+              <FormInput
+                label="Name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                delay={0.5}
+                placeholder="your name"
+              />
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-              >
-                <label className="block text-sm font-medium mb-2">Message</label>
-                <Textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  className="bg-background/50 min-h-[150px]"
-                  placeholder="Tell me about your project..."
-                />
-              </motion.div>
+              <FormInput
+                label="Email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                delay={0.6}
+                placeholder="your email"
+              />
+
+              <FormTextarea
+                label="Message"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                delay={0.7}
+                placeholder="Tell me about your project..."
+              />
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -235,6 +154,93 @@ export default function Contact() {
           </motion.div>
         </div>
       </div>
-    </div>
+    </section>
+  );
+}
+
+interface InfoCardProps {
+  icon: ReactNode;
+  title: string;
+  text: string;
+  color: "primary" | "secondary" | "accent";
+}
+
+const colorVariants: Record<InfoCardProps["color"], string> = {
+  primary: "bg-primary/10 text-primary",
+  secondary: "bg-secondary/10 text-secondary",
+  accent: "bg-accent/10 text-accent",
+};
+
+function InfoCard({ icon, title, text, color }: InfoCardProps) {
+  return (
+    <motion.div
+      className="glass-card p-5 sm:p-6 rounded-2xl max-w-md mx-auto md:mx-0"
+      whileHover={{ scale: 1.05, y: -5 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <div className="flex flex-col items-center text-center gap-4 md:flex-row md:items-start md:text-left">
+        <div className={`p-3 rounded-full ${colorVariants[color]} flex-shrink-0`}>{icon}</div>
+        <div className="space-y-1">
+          <h3 className="text-base sm:text-lg font-semibold">{title}</h3>
+          <p className="text-sm sm:text-base text-muted-foreground">{text}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+interface FormInputProps {
+  label: string;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+  placeholder: string;
+  delay: number;
+}
+
+function FormInput({ label, value, onChange, type = "text", placeholder, delay }: FormInputProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+    >
+      <label className="block text-sm font-medium mb-2">{label}</label>
+      <Input
+        type={type}
+        value={value}
+        onChange={onChange}
+        required
+        className="bg-background/60 focus-visible:ring-primary/70"
+        placeholder={placeholder}
+      />
+    </motion.div>
+  );
+}
+
+interface FormTextareaProps {
+  label: string;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder: string;
+  delay: number;
+}
+
+function FormTextarea({ label, value, onChange, placeholder, delay }: FormTextareaProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+    >
+      <label className="block text-sm font-medium mb-2">{label}</label>
+      <Textarea
+        value={value}
+        onChange={onChange}
+        required
+        className="bg-background/60 min-h-[150px] focus-visible:ring-primary/70"
+        placeholder={placeholder}
+      />
+    </motion.div>
   );
 }

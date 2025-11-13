@@ -7,7 +7,7 @@ const skills = [
   { name: "JAVA", level: 85, color: "from-green-500 to-emerald-500" },
   { name: "MySQL", level: 85, color: "from-purple-500 to-pink-500" },
   { name: "PostgreSQL", level: 85, color: "from-cyan-500 to-teal-500" },
-  { name: "Git & GitHub", level: 90, color: "from-pink-500 to-rose-500" },
+  { name: "Git and GitHub", level: 90, color: "from-pink-500 to-rose-500" },
   { name: "Firebase", level: 80, color: "from-green-500 to-cyan-500" },
 ];
 
@@ -86,7 +86,7 @@ export default function Skills() {
         >
           <div className="space-y-6">
             {skills.map((skill, index) => (
-              <SkillBar key={skill.name} {...skill} index={index} />
+              <SkillBar key={skill.name} name={skill.name} level={skill.level} color={skill.color} index={index} />
             ))}
           </div>
         </motion.div>

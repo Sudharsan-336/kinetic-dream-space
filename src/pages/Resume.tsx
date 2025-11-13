@@ -4,33 +4,39 @@ import { Download, FileText } from "lucide-react";
 
 export default function Resume() {
   return (
-    <div className="min-h-screen py-32 px-4 relative overflow-hidden">
-      <div className="absolute top-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-20 left-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: "2s" }} />
-      
-      <div className="max-w-4xl mx-auto relative z-10">
+    <section className="relative overflow-hidden py-16 md:py-28 px-4 sm:px-6">
+      <div className="pointer-events-none hidden lg:block absolute top-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-[110px] animate-float" />
+      <div
+        className="pointer-events-none hidden md:block absolute bottom-10 left-6 md:left-20 w-64 md:w-80 h-64 md:h-80 bg-primary/10 rounded-full blur-[120px] animate-float"
+        style={{ animationDelay: "2s" }}
+      />
+
+      <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16 px-2"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text pb-2">My Resume</h1>
-          <p className="text-xl text-muted-foreground pt-1">Download my professional resume</p>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 gradient-text pb-2">My Resume</h1>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground pt-1 max-w-2xl mx-auto">
+            Download my professional resume
+          </p>
         </motion.div>
 
-        <div className="glass-card p-12 rounded-3xl text-center">
-          <div className="inline-flex p-8 rounded-full bg-primary/10 mb-8">
-            <FileText size={80} className="text-primary" />
+        <div className="glass-card p-6 sm:p-8 md:p-10 rounded-3xl text-center space-y-6">
+          <div className="inline-flex p-6 sm:p-8 rounded-full bg-primary/10 mx-auto">
+            <FileText size={64} className="text-primary sm:hidden" />
+            <FileText size={80} className="text-primary hidden sm:block" />
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Professional Resume</h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+          <h2 className="text-xl sm:text-2xl font-bold">Professional Resume</h2>
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
             Get the full overview of my experience, education, and skills in a beautifully formatted PDF.
           </p>
 
           <Button
             size="lg"
-            className="glow-border hover:scale-105 transition-transform"
+            className="glow-border hover:scale-105 transition-transform mx-auto"
             asChild
           >
             <a href="/Sudharsan%20R%20-%20Resume.pdf" download="Sudharsan R - Resume.pdf">
@@ -44,7 +50,7 @@ export default function Resume() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 grid md:grid-cols-2 gap-6"
+          className="mt-10 md:mt-12 grid gap-6 md:grid-cols-2"
         >
           <motion.div 
             className="glass-card p-6 rounded-2xl"
@@ -84,7 +90,7 @@ export default function Resume() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <div className="font-semibold whitespace-nowrap">B.Tech in Computer Science and Business System</div>
+                <div className="font-semibold">B.Tech in Computer Science and Business System</div>
                 <div className="text-sm text-muted-foreground">Panimalar Engineering College, Chennai • 2023 – 2027</div>
               </motion.div>
               <motion.div
@@ -156,6 +162,6 @@ export default function Resume() {
           </motion.div>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 }

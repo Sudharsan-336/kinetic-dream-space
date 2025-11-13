@@ -37,20 +37,23 @@ const projects: Array<{
 
 export default function Projects() {
   return (
-    <div className="min-h-screen py-20 md:py-32 px-4 sm:px-6 relative">
-      <div className="absolute top-20 left-20 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-float" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="relative overflow-hidden py-16 sm:py-20 md:py-28 px-4 sm:px-6">
+      <div className="pointer-events-none hidden md:block absolute top-20 left-20 w-96 h-96 bg-primary/10 rounded-full blur-[110px] animate-float" />
+      <div className="pointer-events-none hidden lg:block absolute -bottom-32 right-10 w-80 h-80 bg-secondary/10 rounded-full blur-[120px] animate-float" />
+
+      <div className="max-w-6xl xl:max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12 md:mb-16 px-2"
+          className="text-center mb-10 sm:mb-12 md:mb-16 px-2"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 gradient-text pb-2">My Projects</h1>
-          <p className="text-lg sm:text-xl text-muted-foreground pt-1">A showcase of my recent work and experiments</p>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 gradient-text pb-2">My Projects</h1>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground pt-1 max-w-2xl mx-auto">
+            A showcase of my recent work and experiments
+          </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid gap-6 sm:gap-7 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -58,20 +61,23 @@ export default function Projects() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -10 }}
+              className="h-full"
             >
-              <Card className="glass-card border-border overflow-hidden group h-full flex flex-col">
+              <Card className="glass-card border-border overflow-hidden group h-full flex flex-col backdrop-blur-xl">
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-40 sm:h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-48 sm:h-52 md:h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-3 sm:pb-4">
                   <CardTitle className="text-lg sm:text-xl gradient-text pb-1">{project.title}</CardTitle>
-                  <CardDescription className="pt-1 text-sm sm:text-base leading-relaxed">{project.description}</CardDescription>
+                  <CardDescription className="pt-1 text-sm sm:text-base leading-relaxed text-muted-foreground">
+                    {project.description}
+                  </CardDescription>
                 </CardHeader>
                 
                 <CardContent className="flex-1 flex flex-col justify-end pt-0">
@@ -79,7 +85,7 @@ export default function Projects() {
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 sm:px-3 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
+                        className="px-2 sm:px-3 py-1 text-[11px] sm:text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
                       >
                         {tech}
                       </span>
@@ -108,6 +114,6 @@ export default function Projects() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
