@@ -5,20 +5,26 @@ This is my **personal portfolio website** showcasing my skills, projects, educat
 
 ## Features
 - About Me Section  
-- Projects showcase Section
+- Projects Showcase Section
 - Skills Section
 - Education and Experience Section
-- Contact information Section
+- Contact Information Section
+- Mobile Responsive Design
+- Smooth UI with modern styling
+- Fast performance with Vite
 
 ## Technologies Used
 - HTML
 - CSS
-- JavaScript
 - Tailwind CSS
+- JavaScript
 - JSON
 - React
 - Vite
-- Firebase
+- Vercel (for deployment)
+
+## Live Demo
+**View Website :** https://sudharsan-portfolio-mu.vercel.app/
 
 ## Editing the Project Using Your Preferred IDE
 If you want to work locally using your own IDE, you can clone this repository and push changes. This allows you to edit the project on your system with your preferred development setup.
@@ -28,7 +34,11 @@ If you want to work locally using your own IDE, you can clone this repository an
 - Recommended installation method: **nvm**
 
 ## How to Run
-1. **Clone the repository :** https://github.com/Sudharsan-336/ATM-Project.git
-2. **Install the necessary dependencies :** `npm install`
-3. **Start the development server with auto-reloading and instant preview :** `npm run dev`
+1. **Clone this repository:** https://github.com/Sudharsan-336/ATM-Project.git
+2. **Install the necessary dependencies:** `npm install`
+3. **Start the development server with auto-reloading and instant preview:** `npm run dev`
+4. **Build for production (optional):** `npm run build`
 
+## Deployment
+This project is deployed using **vercel**.  
+To redeploy after changes: **vercel deploy**.
