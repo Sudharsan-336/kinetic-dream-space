@@ -72,14 +72,17 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative overflow-hidden py-10 sm:py-16 px-4 sm:px-6">
+    <section
+      id="contact"
+      className="relative overflow-visible pt-32 sm:pt-40 px-4 sm:px-6 scroll-mt-32"
+    >
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <h1 className="text-3xl sm:text-5xl font-bold mb-4 gradient-text">
+          <h1 className="text-5xl sm:text-7xl font-bold mb-4 gradient-text">
             Get In Touch
           </h1>
           <p className="text-sm sm:text-lg text-muted-foreground max-w-xl mx-auto">
@@ -88,7 +91,6 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid gap-6 sm:gap-10 grid-cols-1 md:grid-cols-2">
-          {/* Contact Info Section */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -100,7 +102,6 @@ export default function Contact() {
             <InfoCard icon={<MapPin size={22} />} title="Location" text="India, Tamil Nadu, Kanchipuram-631501" color="accent" />
           </motion.div>
 
-          {/* Form Section */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
