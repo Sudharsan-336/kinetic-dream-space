@@ -34,7 +34,7 @@ If you want to work locally using your own IDE, you can clone this repository an
 - Recommended installation method: **nvm**
 
 ## How to Run
-1. **Clone this repository:** https://github.com/Sudharsan-336/ATM-Project.git
+1. **Clone this repository:** https://github.com/Sudharsan-336/kinetic-dream-space.git
 2. **Install the necessary dependencies:** `npm install`
 3. **Start the development server with auto-reloading and instant preview:** `npm run dev`
 4. **Build for production (optional):** `npm run build`
