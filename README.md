@@ -27,10 +27,11 @@ This is my **personal portfolio website** showcasing my skills, projects, educat
 **View Website :** https://sudharsan-portfolio-mu.vercel.app/
 
 ## Editing the Project Using Your Preferred IDE
-If you want to work locally using your own IDE, you can clone this repository and push changes. This allows you to edit the project on your system with your preferred development setup.
+You can work on this portfolio locally using any preferred IDE (VS Code recommended).  
+By cloning the repository, you can customize the design, update content, and push your changes easily.
 
 ## Requirements
-- Node.js and npm installed  
+- **Node.js** and **npm** installed  
 - Recommended installation method: **nvm**
 
 ## How to Run
