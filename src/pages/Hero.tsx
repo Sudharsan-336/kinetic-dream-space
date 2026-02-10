@@ -102,7 +102,7 @@ export default function Hero() {
                     repeatDelay: 3
                   }}
                 >
-                  HTML
+                  JAVA
                 </motion.span>
                 ,{" "}
                 <motion.span 
@@ -121,8 +121,7 @@ export default function Hero() {
                     delay: 0.5
                   }}
                 >
-                  CSS
-                </motion.span>
+                  MYSQL                </motion.span>
                 ,{" "}
                 <motion.span 
                   className="text-primary font-semibold"
@@ -140,7 +139,7 @@ export default function Hero() {
                     delay: 1
                   }}
                 >
-                  JAVA
+                  HTML
                 </motion.span>
                 ,{" "}
                 <motion.span 
@@ -159,7 +158,7 @@ export default function Hero() {
                     delay: 1.5
                   }}
                 >
-                  MAVEN
+                
                 </motion.span>
                 ,{" "}
                 <motion.span 
